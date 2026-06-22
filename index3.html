@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can'Angie - Services Canins Professionnels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css" />
+    <style>
+        .bg-primary { background-color: #adbbb2; }
+        .bg-secondary { background-color: #c7b198; }
+        .bg-accent { background-color: #800020; }
+        .text-primary { color: #adbbb2; }
+        .text-secondary { color: #c7b198; }
+        .text-accent { color: #800020; }
+        .border-primary { border-color: #adbbb2; }
+        .border-secondary { border-color: #c7b198; }
+        .border-accent { border-color: #800020; }
+        
+        
+        .hero-bg {
+        background-image:
+        linear-gradient(rgba(0,0,0,0.30), rgba(0,0,0,0.30)),
+        url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+    }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Expander (overlay + panel) */
+        .expander-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 60;
+            pointer-events: none; /* disabled until open */
+        }
+        .expander-overlay.open {
+            pointer-events: auto;
+        }
+        .expander-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 300ms ease;
+        }
+        .expander-overlay.open .expander-backdrop {
+            opacity: 1;
+        }
+        .expander-panel {
+            position: relative;
+            width: min(92vw, 960px);
+            max-height: 88vh;
+            background: white;
+            border-radius: 1rem; /* rounded-2xl */
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+            overflow: hidden;
+            transform: translateZ(0); /* promote */
+        }
+        .expander-content {
+            overflow: auto;
+            max-height: inherit;
+        }
+        .expander-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="ph-duotone ph-heart text-accent mr-2"></i></i>
+                    <span class="text-xl font-bold text-accent">Can'Angie</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-accent">Services</a>
+                    <a href="#about" class="text-gray-700 hover:text-accent">À Propos</a>
+                    <a href="#zone-contact" class="text-gray-700 hover:text-accent">Où j'interviens</a>
+                    <a href="#contact" class="text-gray-700 hover:text-accent">Contact</a>
+                </div>
+                <button class="md:hidden focus:outline-none" aria-label="Ouvrir le menu">
+                    <i class="ph ph-list"></i></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header  class="hero-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Votre Partenaire Canin de Confiance</h1>
+            <p class="text-xl md:text-2xl mb-8">Des services sur mesure pour le bien-être de votre compagnon à quatre pattes</p>
+            <a href="#contact" class="bg-accent hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center">
+                Réserver maintenant
+                <i class="ph ph-arrow-right ml-2"></i></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-accent mb-12">Mes services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition duration-300" data-details-id="tpl-service-balades">
+                    <div class="mb-4 overflow-hidden rounded-xl w-full h-40">
+                        <img src="img/1.jpg" alt="Balade canine en extérieur" class="w-full h-full object-cover" loading="lazy" width="400" height="160">
+                    </div>
+                    <h3 class="text-xl font-bold text-accent mb-3">Balades Canines</h3>
+                    <p class="text-gray-600 mb-4">Individuelles, collectives ou avec les maîtres - adaptées aux besoins de votre chien.</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center js-learn-more" aria-label="En savoir plus sur Balades Canines">
+                        En savoir plus
+                        <i class="ph ph-caret-right ml-1"></i></i>
+                    </a>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition duration-300" data-details-id="tpl-service-education">
+                    <div class="mb-4 overflow-hidden rounded-xl w-full h-40">
+                        <img src="img/2.jpg" alt="Éducation canine" class="w-full h-full object-cover" loading="lazy" width="400" height="160"></div>
+                    <h3 class="text-xl font-bold text-accent mb-3">Éducation & Rééducation</h3>
+                    <p class="text-gray-600 mb-4">Des méthodes douces pour aider votre chien à s'épanouir et corriger les comportements indésirables.</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center js-learn-more" aria-label="En savoir plus sur Éducation & Rééducation">
+                        En savoir plus
+                        <i class="ph ph-caret-right ml-1"></i></i>
+                    </a>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition duration-300" data-details-id="tpl-service-petsitting">
+                    <div class="mb-4 overflow-hidden rounded-xl w-full h-40">
+                        <img src="img/3.jpg" alt="Pet sitting" class="w-full h-full object-cover" loading="lazy" width="400" height="160"></div>
+                    <h3 class="text-xl font-bold text-accent mb-3">Pet Sitting</h3>
+                    <p class="text-gray-600 mb-4">Garderie à domicile ou chez moi pour que votre chien se sente comme à la maison en votre absence.</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center js-learn-more" aria-label="En savoir plus sur Pet Sitting">
+                        En savoir plus
+                        <i class="ph ph-caret-right ml-1"></i></i>
+                    </a>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition duration-300" data-details-id="tpl-service-adoption">
+                    <div class="mb-4 overflow-hidden rounded-xl w-full h-40">
+                        <img src="img/4.jpg" alt="Adoption chiot" class="w-full h-full object-cover" loading="lazy" width="400" height="160">
+                    </div>
+                    <h3 class="text-xl font-bold text-accent mb-3">Formules Adoption</h3>
+                    <p class="text-gray-600 mb-4">Accompagnement complet pour les nouveaux propriétaires et leurs chiens adoptés.</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center js-learn-more" aria-label="En savoir plus sur Formules Adoption">
+                        En savoir plus
+                        <i class="ph ph-caret-right ml-1"></i></i>
+                    </a>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition duration-300" data-details-id="tpl-service-nutrition">
+                    <div class="mb-4 overflow-hidden rounded-xl w-full h-40">
+                        <img src="img/5.jpg" alt="Conseils nutrition" class="w-full h-full object-cover" loading="lazy" width="400" height="160"></div>
+                    <h3 class="text-xl font-bold text-accent mb-3">Conseils Nutrition</h3>
+                    <p class="text-gray-600 mb-4">Des recommandations personnalisées pour une alimentation saine et adaptée à votre chien.</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center js-learn-more" aria-label="En savoir plus sur Conseils Nutrition">
+                        En savoir plus
+                        <i class="ph ph-caret-right ml-1"></i></i>
+                    </a>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition duration-300" data-details-id="tpl-service-ateliers">
+                    <div class="mb-4 overflow-hidden rounded-xl w-full h-40">
+                        <img src="img/6.jpg" alt="Ateliers ludiques agility" class="w-full h-full object-cover" loading="lazy" width="400" height="160"></div>
+                    <h3 class="text-xl font-bold text-accent mb-3">Ateliers Ludiques</h3>
+                    <p class="text-gray-600 mb-4">Des activités fun pour renforcer votre complicité avec votre chien tout en s'amusant.</p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center js-learn-more" aria-label="En savoir plus sur Ateliers Ludiques">
+                        En savoir plus
+                        <i class="ph ph-caret-right ml-1"></i></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-secondary bg-opacity-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="http://static.photos/people/640x360/1" alt="Angie avec des chiens" class="rounded-lg shadow-xl">
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <h2 class="text-3xl font-bold text-accent mb-6">Qui suis-je ?</h2>
+                    <p class="text-gray-700 mb-4">Je suis Angie, passionnée par les chiens depuis toujours. Diplômée en éducation canine et comportementaliste certifiée, je mets mon expertise et mon amour des animaux au service de votre compagnon.</p>
+                    <p class="text-gray-700 mb-6">Chez Can'Angie, chaque chien est unique. J'adapte mes méthodes à chaque personnalité pour offrir une expérience positive et enrichissante.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white px-4 py-2 rounded-full shadow-sm flex items-center">
+                            <i class="ph-duotone ph-check-circle text-primary mr-2"></i></i>
+                            <span>Certifiée</span>
+                        </div>
+                        <div class="bg-white px-4 py-2 rounded-full shadow-sm flex items-center">
+                            <i class="ph-duotone ph-check-circle text-primary mr-2"></i></i>
+                            <span>Expérience 10+ ans</span>
+                        </div>
+                        <div class="bg-white px-4 py-2 rounded-full shadow-sm flex items-center">
+                            <i class="ph-duotone ph-check-circle text-primary mr-2"></i></i>
+                            <span>Assurée</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zone & Premier Contact Section -->
+        <section id="zone-contact" class="py-16" style="background-color: #f5f0f0;">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-accent mb-4">Où j'interviens &amp; Comment commencer</h2>
+                <p class="text-center text-gray-600 mb-12 max-w-xl mx-auto">Des services accessibles selon votre situation, partout en France ou à distance.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                    <!-- Bloc 1 : Zones d'intervention -->
+                    <div class="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-6">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full" style="background-color: #fce8ec;">
+                                <i class="ph-duotone ph-map-pin text-accent text-2xl"></i>
+                            </span>
+                            <h3 class="text-xl font-bold text-accent">Mes zones d'intervention</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-4 p-4 rounded-xl border border-gray-100" style="background-color: #fdf6f7;">
+                                <span class="mt-0.5 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full" style="background-color: #fce8ec;">
+                                    <i class="ph-duotone ph-city text-accent text-lg"></i>
+                                </span>
+                                <div>
+                                    <span class="font-semibold text-gray-800 block">Île-de-France</span>
+                                    <span class="text-sm text-gray-500">Interventions en présentiel - Paris et toute la région</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 p-4 rounded-xl border border-gray-100" style="background-color: #fdf6f7;">
+                                <span class="mt-0.5 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full" style="background-color: #fce8ec;">
+                                    <i class="ph-duotone ph-map-trifold text-accent text-lg"></i>
+                                </span>
+                                <div>
+                                    <span class="font-semibold text-gray-800 block">Toute la France</span>
+                                    <span class="text-sm text-gray-500">Déplacements ponctuels possibles selon les projets</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 p-4 rounded-xl border border-gray-100" style="background-color: #fdf6f7;">
+                                <span class="mt-0.5 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full" style="background-color: #fce8ec;">
+                                    <i class="ph-duotone ph-video-camera text-accent text-lg"></i>
+                                </span>
+                                <div>
+                                    <span class="font-semibold text-gray-800 block">En visioconférence</span>
+                                    <span class="text-sm text-gray-500">Consultations et suivis à distance - partout en France et à l'international</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                  <!-- Bloc 2 : Processus -->
+<div class="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-5">
+    <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full" style="background-color: #fce8ec;">
+            <i class="ph-duotone ph-path text-accent text-2xl"></i>
+        </span>
+        <h3 class="text-xl font-bold text-accent">Comment ça se passe ?</h3>
+    </div>
+
+    <!-- Étape 1 -->
+    <div class="flex items-start gap-4">
+        <div class="flex flex-col items-center flex-shrink-0">
+            <span class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background-color: #800020;">1</span>
+            <div class="w-0.5 h-full min-h-8 mt-1" style="background-color: #f0d0d6;"></div>
+        </div>
+        <div class="pb-2">
+            <p class="font-semibold text-gray-800 flex items-center gap-2">
+                <i class="ph-duotone ph-envelope text-accent"></i> Prise de contact
+            </p>
+            <p class="text-sm text-gray-500 mt-0.5">Vous m'appelez, m'écrivez ou remplissez le formulaire de contact.</p>
+        </div>
+    </div>
+
+    <!-- Étape 2 -->
+    <div class="flex items-start gap-4">
+        <div class="flex flex-col items-center flex-shrink-0">
+            <span class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background-color: #800020;">2</span>
+            <div class="w-0.5 h-full min-h-8 mt-1" style="background-color: #f0d0d6;"></div>
+        </div>
+        <div class="pb-2">
+            <p class="font-semibold text-gray-800 flex items-center gap-2">
+                <i class="ph-duotone ph-phone-call text-accent"></i> Retour de ma part dans les meilleurs delais
+            </p>
+            <p class="text-sm text-gray-500 mt-0.5">Je reviendrai vers vous pour échanger rapidement sur votre situation et vos attentes.</p>
+        </div>
+    </div>
+
+    <!-- Étape 3 -->
+    <div class="flex items-start gap-4">
+        <div class="flex flex-col items-center flex-shrink-0">
+            <span class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background-color: #800020;">3</span>
+            <div class="w-0.5 h-full min-h-8 mt-1" style="background-color: #f0d0d6;"></div>
+        </div>
+        <div class="pb-2">
+            <p class="font-semibold text-gray-800 flex items-center gap-2">
+                <i class="ph-duotone ph-video-camera text-accent"></i> Bilan (facultatif selon prestation) <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white ml-1" style="background-color: #800020;">2h — payant</span>
+            </p>
+            <p class="text-sm text-gray-500 mt-0.5">Séance approfondie pour évaluer votre chien, votre environnement et définir les objectifs.(présentiel ou en visio)</p>
+        </div>
+    </div>
+
+    <!-- Étape 4 -->
+    <div class="flex items-start gap-4">
+        <div class="flex flex-col items-center flex-shrink-0">
+            <span class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background-color: #800020;">4</span>
+            <div class="w-0.5 h-full min-h-8 mt-1" style="background-color: #f0d0d6;"></div>
+        </div>
+        <div class="pb-2">
+            <p class="font-semibold text-gray-800 flex items-center gap-2">
+                <i class="ph-duotone ph-list-checks text-accent"></i> Choix de votre formule
+            </p>
+            <p class="text-sm text-gray-500 mt-0.5">Etablissement d'une formule adaptée à vos besoins et au profil de votre chien.</p>
+        </div>
+    </div>
+
+    <!-- Étape 5 -->
+    <div class="flex items-start gap-4">
+        <div class="flex flex-col items-center flex-shrink-0">
+            <span class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm" style="background-color: #800020;">5</span>
+        </div>
+        <div>
+            <p class="font-semibold text-gray-800 flex items-center gap-2">
+                <i class="ph-duotone ph-calendar-check text-accent"></i> Suivi personnalisé sur mesure
+            </p>
+            <p class="text-sm text-gray-500 mt-0.5">Prise de RDV et démarrage du plan d'accompagnement progressif adapté à votre chien.</p>
+        </div>
+    </div>
+
+    <a href="#contact" class="bg-accent hover:bg-opacity-90 text-white font-bold py-3 px-6 rounded-full transition duration-300 inline-flex items-center justify-center self-start mt-2">
+        Démarrer le processus
+        <i class="ph ph-arrow-right ml-2"></i>
+    </a>
+</div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-accent text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Contactez-moi</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h3 class="text-xl font-bold mb-4">Informations de contact</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="ph-duotone ph-phone mr-4"></i></i>
+                            <span>+33 6 12 34 56 78</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ph-duotone ph-envelope mr-4"></i></i>
+                            <span>contact@canangie.com</span>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold mb-4">Horaires de contact</h3>
+                        <p>Lundi - Vendredi: 9h - 20h</p>
+                        <p>Samedi/Dimanche: 9h - 20h</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                   <!-- Message de confirmation -->
+    <div id="form-success" class="hidden p-6 rounded-xl text-center" style="background: rgba(255,255,255,0.15);">
+        <i class="ph-duotone ph-check-circle text-5xl mb-3 block"></i>
+        <h4 class="text-xl font-bold mb-2">Message envoyé ! 🎉</h4>
+        <p class="opacity-90">Merci, je vous réponds dans les plus brefs délais.</p>
+    </div>
+
+    <form id="contact-form" action="https://formspree.io/f/mykqgqoz" method="POST" class="space-y-4">
+        <input type="hidden" name="_subject" value="Nouveau message - CanAngie">
+        <div>
+            <label for="name" class="block mb-1">Votre Nom/Prénom</label>
+            <input type="text" id="name" name="name" required
+                class="w-full px-4 py-2 rounded bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-white"
+                placeholder="Marie Dupont">
+        </div>
+        <div>
+            <label for="email" class="block mb-1">Votre email</label>
+            <input type="email" id="email" name="email" required
+                class="w-full px-4 py-2 rounded bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-white"
+                placeholder="marie@exemple.fr">
+        </div>
+        <div>
+            <label for="phone" class="block mb-1">Votre téléphone (optionnel)</label>
+            <input type="tel" id="phone" name="phone"
+                class="w-full px-4 py-2 rounded bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-white"
+                placeholder="06 12 34 56 78">
+        </div>
+        <div>
+            <label for="service" class="block mb-1">Service intéressé</label>
+            <select id="service" name="service" class="w-full px-4 py-2 rounded bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-white">
+                <option value="">Sélectionnez un service</option>
+                <option value="Balade canine">Balade canine</option>
+                <option value="Éducation & Rééducation">Éducation & Rééducation</option>
+                <option value="Pet sitting">Pet sitting</option>
+                <option value="Conseils Nutrition">Conseils Nutrition</option>
+                <option value="Formule adoption">Formule adoption</option>
+                <option value="Ateliers Ludiques">Ateliers Ludiques</option>
+                <option value="Bilan visio gratuit">Bilan visio </option>
+                <option value="Autre">Autre</option>
+            </select>
+        </div>
+        <div>
+            <label for="message" class="block mb-1">Votre message</label>
+            <textarea id="message" name="message" rows="4" required
+                class="w-full px-4 py-2 rounded bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-white"
+                placeholder="Parlez-moi de votre chien, de vos besoins..."></textarea>
+        </div>
+        <button type="submit" id="submit-btn" class="bg-white text-accent font-bold py-3 px-6 rounded-full hover:bg-opacity-90 transition duration-300">
+            <span id="submit-text">Envoyer le message</span>
+        </button>
+    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-accent bg-opacity-90 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="ph-duotone ph-heart mr-2"></i></i>
+                        <span class="text-xl font-bold">Can'Angie</span>
+                    </div>
+                    <p class="mt-2 text-sm opacity-80">Votre partenaire canin de confiance depuis 2017.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-primary transition duration-300" aria-label="Facebook">
+                        <i class="ph ph-facebook-logo"></i></i>
+                    </a>
+                    <a href="#" class="hover:text-primary transition duration-300" aria-label="Instagram">
+                        <i class="ph ph-instagram-logo"></i></i>
+                    </a>
+                    <a href="#" class="hover:text-primary transition duration-300" aria-label="Twitter">
+                        <i class="ph ph-twitter-logo"></i></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-white border-opacity-20 mt-8 pt-8 flex flex-col md:flex-row justify-between">
+                <div class="text-sm mb-4 md:mb-0">
+                    © 2026 Can'Angie. Tous droits réservés.
+                </div>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="hover:text-primary transition duration-300">Mentions légales</a>
+                    <a href="#" class="hover:text-primary transition duration-300">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-primary transition duration-300">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Overlay / Expander root (created on demand) -->
+    <div id="expander-root" aria-hidden="true" class="hidden"></div>
+
+    <!-- Detail Templates -->
+    <template id="tpl-service-balades">
+        <div class="relative">
+            <div class="h-40 w-full bg-[url('https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1974&auto=format&fit=crop')] bg-cover bg-center"></div>
+            <div class="p-6 expander-content">
+                <h3 class="text-2xl font-bold text-accent mb-2 flex items-center">
+                    <i class="ph-duotone ph-map-trifold mr-2"></i></i> Balades Canines
+                </h3>
+                <p class="text-gray-600 mb-4">Un moment d'exploration, d'exercice et de socialisation, pensé pour la morphologie et le tempérament de votre chien.</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                    <li class="flex items-start"><i class="ph-duotone ph-clock mr-2 text-primary"></i></i><span>Durées au choix : 30, 45 ou 60 min</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-users-three mr-2 text-primary"></i></i><span>Individuelle ou petit groupe (max 4)</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-shield-check mr-2 text-primary"></i></i><span>Itinéraires sécurisés & assurance incluse</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-camera mr-2 text-primary"></i></i><span>Report photo après la balade</span></li>
+                </ul>
+                <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                    <h4 class="font-semibold mb-2 flex items-center"><i class="ph-duotone ph-tag mr-2"></i></i>À partir de 18€</h4>
+                    <p class="text-sm text-gray-600">Tarif variable selon la durée, la zone et le nombre de chiens du foyer.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-full inline-flex items-center"><i class="ph-duotone ph-chat-circle mr-2"></i></i>Demander un devis</a>
+                    <button class="border border-accent text-accent px-5 py-2 rounded-full inline-flex items-center expander-close-btn"><i class="ph ph-x mr-2"></i></i>Fermer</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-service-education">
+        <div class="relative">
+            <div class="h-40 w-full bg-[url('https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+            <div class="p-6 expander-content">
+                <h3 class="text-2xl font-bold text-accent mb-2 flex items-center">
+                    <i class="ph-duotone ph-medal mr-2"></i></i> Éducation & Rééducation
+                </h3>
+                <p class="text-gray-600 mb-4">Des séances personnalisées et bienveillantes pour construire des bases solides et corriger les comportements gênants.</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                    <li class="flex items-start"><i class="ph-duotone ph-house mr-2 text-primary"></i></i><span>À domicile ou en extérieur</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-crosshair mr-2 text-primary"></i></i><span>Objectifs clairs & plan d'entraînement</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-user-check mr-2 text-primary"></i></i><span>Approche positive, respect du chien</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-book-open mr-2 text-primary"></i></i><span>Supports & exercices entre les séances</span></li>
+                </ul>
+                <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                    <h4 class="font-semibold mb-2 flex items-center"><i class="ph-duotone ph-tag mr-2"></i></i>À partir de 45€ / séance</h4>
+                    <p class="text-sm text-gray-600">Forfaits disponibles (3, 5 ou 8 séances) avec suivi par messages.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-full inline-flex items-center"><i class="ph-duotone ph-chat-circle mr-2"></i></i>Parler de mon chien</a>
+                    <button class="border border-accent text-accent px-5 py-2 rounded-full inline-flex items-center expander-close-btn"><i class="ph ph-x mr-2"></i></i>Fermer</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-service-petsitting">
+        <div class="relative">
+            <div class="h-40 w-full bg-[url('https://images.unsplash.com/photo-1507149833265-60c372daea22?q=80&w=2069&auto=format&fit=crop')] bg-cover bg-center"></div>
+            <div class="p-6 expander-content">
+                <h3 class="text-2xl font-bold text-accent mb-2 flex items-center">
+                    <i class="ph-duotone ph-house mr-2"></i></i> Pet Sitting
+                </h3>
+                <p class="text-gray-600 mb-4">Gardes à domicile ou en famille d'accueil pour un environnement rassurant et des routines respectées.</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                    <li class="flex items-start"><i class="ph-duotone ph-sun mr-2 text-primary"></i></i><span>Visites quotidiennes ou nuitées</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-heartbeat mr-2 text-primary"></i></i><span>Promenades & jeux inclus</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-file-text mr-2 text-primary"></i></i><span>Journal + photos / vidéos</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-heart mr-2 text-primary"></i></i><span>Chiens sociables uniquement chez l'hôte</span></li>
+                </ul>
+                <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                    <h4 class="font-semibold mb-2 flex items-center"><i class="ph-duotone ph-tag mr-2"></i></i>Visite dès 20€ — Nuitée dès 35€</h4>
+                    <p class="text-sm text-gray-600">Tarifs selon durée, zone et besoins spécifiques (médication, etc.).</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-full inline-flex items-center"><i class="ph-duotone ph-chat-circle mr-2"></i></i>Obtenir un devis</a>
+                    <button class="border border-accent text-accent px-5 py-2 rounded-full inline-flex items-center expander-close-btn"><i class="ph ph-x mr-2"></i></i>Fermer</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-service-adoption">
+        <div class="relative">
+            <div class="h-40 w-full bg-[url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+            <div class="p-6 expander-content">
+                <h3 class="text-2xl font-bold text-accent mb-2 flex items-center">
+                    <i class="ph-duotone ph-users-three mr-2"></i></i> Formules Adoption
+                </h3>
+                <p class="text-gray-600 mb-4">De la préparation à l'arrivée à la maison, jusqu'aux premières semaines : on construit des bases sereines.</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                    <li class="flex items-start"><i class="ph-duotone ph-compass mr-2 text-primary"></i></i><span>Choix du chien & préparation du foyer</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-calendar mr-2 text-primary"></i></i><span>Planning des premiers jours</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-smiley mr-2 text-primary"></i></i><span>Socialisation & premiers apprentissages</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-lifebuoy mr-2 text-primary"></i></i><span>Suivi à distance entre les séances</span></li>
+                </ul>
+                <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                    <h4 class="font-semibold mb-2 flex items-center"><i class="ph-duotone ph-tag mr-2"></i></i>Pack découverte dès 90€</h4>
+                    <p class="text-sm text-gray-600">Packs 2 à 5 séances selon vos besoins. Réduction adoption refuge/asso.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-full inline-flex items-center"><i class="ph-duotone ph-chat-circle mr-2"></i></i>Être accompagné(e)</a>
+                    <button class="border border-accent text-accent px-5 py-2 rounded-full inline-flex items-center expander-close-btn"><i class="ph ph-x mr-2"></i></i>Fermer</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-service-nutrition">
+        <div class="relative">
+            <div class="h-40 w-full bg-[url('https://images.unsplash.com/photo-1517842184082-909d52675f39?q=80&w=2069&auto=format&fit=crop')] bg-cover bg-center"></div>
+            <div class="p-6 expander-content">
+                <h3 class="text-2xl font-bold text-accent mb-2 flex items-center">
+                    <i class="ph-duotone ph-heartbeat mr-2"></i></i> Conseils Nutrition
+                </h3>
+                <p class="text-gray-600 mb-4">Un bilan complet pour adapter l'alimentation à l'âge, l'activité et les sensibilités de votre chien.</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                    <li class="flex items-start"><i class="ph-duotone ph-clipboard mr-2 text-primary"></i></i><span>Questionnaire & entretien approfondi</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-chart-pie mr-2 text-primary"></i></i><span>Rations, marques & transitions guidées</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-warning mr-2 text-primary"></i></i><span>Sensibilités : digestions, allergies, poids</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-arrows-clockwise mr-2 text-primary"></i></i><span>Suivi d'ajustement 30 jours</span></li>
+                </ul>
+                <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                    <h4 class="font-semibold mb-2 flex items-center"><i class="ph-duotone ph-tag mr-2"></i></i>Bilan initial 50€</h4>
+                    <p class="text-sm text-gray-600">Formule avec suivi : 80€ (inclut 2 échanges d'ajustement).</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-full inline-flex items-center"><i class="ph-duotone ph-chat-circle mr-2"></i></i>Prendre rendez-vous</a>
+                    <button class="border border-accent text-accent px-5 py-2 rounded-full inline-flex items-center expander-close-btn"><i class="ph ph-x mr-2"></i></i>Fermer</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-service-ateliers">
+        <div class="relative">
+            <div class="h-40 w-full bg-[url('https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+            <div class="p-6 expander-content">
+                <h3 class="text-2xl font-bold text-accent mb-2 flex items-center">
+                    <i class="ph-duotone ph-smiley mr-2"></i></i> Ateliers Ludiques
+                </h3>
+                <p class="text-gray-600 mb-4">Des activités fun pour renforcer la complicité et dépenser son chien autrement.</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                    <li class="flex items-start"><i class="ph-duotone ph-lightning mr-2 text-primary"></i></i><span>Agility soft & parcours ludiques</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-magnifying-glass mr-2 text-primary"></i></i><span>Jeux de flair & pistage</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-users-three mr-2 text-primary"></i></i><span>Groupes de niveaux</span></li>
+                    <li class="flex items-start"><i class="ph-duotone ph-calendar mr-2 text-primary"></i></i><span>Sessions week-end & soirées</span></li>
+                </ul>
+                <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                    <h4 class="font-semibold mb-2 flex items-center"><i class="ph-duotone ph-tag mr-2"></i></i>À partir de 25€ / atelier</h4>
+                    <p class="text-sm text-gray-600">Carnet 5 ateliers : -10%.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-full inline-flex items-center"><i class="ph-duotone ph-chat-circle mr-2"></i></i>Voir le calendrier</a>
+                    <button class="border border-accent text-accent px-5 py-2 rounded-full inline-flex items-center expander-close-btn"><i class="ph ph-x mr-2"></i></i>Fermer</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // phosphor — no replace needed;
+
+        // Helpers
+        const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+        // Build the expander root when needed
+        function ensureExpanderRoot() {
+            let root = document.getElementById('expander-root');
+            if (!root) {
+                root = document.createElement('div');
+                root.id = 'expander-root';
+                document.body.appendChild(root);
+            }
+            return root;
+        }
+
+        function openFromCard(card) {
+            const detailsId = card.getAttribute('data-details-id');
+            const tpl = detailsId ? document.getElementById(detailsId) : null;
+            const contentHTML = tpl ? tpl.innerHTML :
+                '<div class="p-6 expander-content"><h3 class="text-2xl font-bold text-accent mb-2">Détails</h3><p class="text-gray-600">Contenu à venir…</p></div>';
+
+            const rect = card.getBoundingClientRect();
+            const root = ensureExpanderRoot();
+            root.innerHTML = ''; // reset
+
+            // Overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'expander-overlay';
+            overlay.setAttribute('role','dialog');
+            overlay.setAttribute('aria-modal','true');
+
+            // Backdrop
+            const backdrop = document.createElement('div');
+            backdrop.className = 'expander-backdrop';
+            overlay.appendChild(backdrop);
+
+            // Panel (final geometry is centered & responsive thanks to CSS width)
+            const panel = document.createElement('div');
+            panel.className = 'expander-panel';
+            // Inner scrollable content
+            const inner = document.createElement('div');
+            inner.innerHTML = contentHTML;
+            panel.appendChild(inner);
+
+            // Close button
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'expander-close bg-white/80 hover:bg-white rounded-full p-2 shadow-md expander-close';
+            closeBtn.setAttribute('aria-label', 'Fermer');
+            closeBtn.innerHTML = '<i class="ph ph-x" style="font-size:1.25rem;"></i>';
+            panel.appendChild(closeBtn);
+
+            overlay.appendChild(panel);
+            root.appendChild(overlay);
+            root.classList.remove('hidden');
+
+            // Run feather on injected content
+            // phosphor — no replace needed;
+
+            // Measure final geometry
+            panel.style.visibility = 'hidden';
+            overlay.classList.add('open'); // to make sure sizes are correct
+            // Force layout
+            const finalRect = panel.getBoundingClientRect();
+            panel.style.visibility = '';
+
+            // FLIP: set initial transform so the panel visually sits on top of the card
+            const dx = (rect.left + rect.width/2) - (finalRect.left + finalRect.width/2);
+            const dy = (rect.top + rect.height/2) - (finalRect.top + finalRect.height/2);
+            const sx = rect.width / finalRect.width;
+            const sy = rect.height / finalRect.height;
+
+            panel.style.transformOrigin = 'center center';
+            panel.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
+            panel.style.opacity = '0.98';
+
+            // Animate to final
+            requestAnimationFrame(() => {
+                overlay.classList.add('open');
+                panel.style.transition = 'transform 450ms cubic-bezier(0.2, 0.7, 0, 1), opacity 300ms ease';
+                panel.style.transform = 'translate(0, 0) scale(1, 1)';
+                panel.style.opacity = '1';
+            });
+
+            function closeWithAnimation() {
+                // Recompute card position (in case of scroll)
+                const targetRect = card.getBoundingClientRect();
+                const fRect = panel.getBoundingClientRect();
+                const ddx = (targetRect.left + targetRect.width/2) - (fRect.left + fRect.width/2);
+                const ddy = (targetRect.top + targetRect.height/2) - (fRect.top + fRect.height/2);
+                const ssx = targetRect.width / fRect.width;
+                const ssy = targetRect.height / fRect.height;
+
+                panel.style.transition = 'transform 350ms cubic-bezier(0.2, 0.7, 0, 1), opacity 300ms ease';
+                panel.style.transform = `translate(${ddx}px, ${ddy}px) scale(${ssx}, ${ssy})`;
+                panel.style.opacity = '0.98';
+                overlay.classList.remove('open');
+                setTimeout(() => {
+                    root.classList.add('hidden');
+                    root.innerHTML = '';
+                    document.documentElement.classList.remove('overflow-hidden');
+                }, 360);
+            }
+
+            // Close interactions
+            backdrop.addEventListener('click', closeWithAnimation);
+            closeBtn.addEventListener('click', closeWithAnimation);
+            overlay.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeWithAnimation();
+            });
+
+            // Trap focus to panel (basic)
+            const focusable = () => $$("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])", panel)
+                .filter(el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+            const firstFocus = focusable()[0] || closeBtn;
+            firstFocus.focus();
+
+            // Prevent background scroll
+            document.documentElement.classList.add('overflow-hidden');
+        }
+
+        // Attach to all "En savoir plus" buttons in service cards
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('.js-learn-more');
+            if (!link) return;
+            e.preventDefault();
+            const card = link.closest('.service-card');
+            if (card) openFromCard(card);
+        });
+
+
+        //email
+        (function() {
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    const submitBtn = document.getElementById('submit-btn');
+    const submitText = document.getElementById('submit-text');
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitText.textContent = 'Envoi en cours...';
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+            form.classList.add('hidden');
+            success.classList.remove('hidden');
+        } else {
+            submitText.textContent = 'Erreur, réessayez';
+            submitBtn.disabled = false;
+        }
+    });
+})();
+    </script>
+</body>
+</html>
